@@ -6,4 +6,4 @@ ModSecurity 规则的 ID 范围没有严格的限制，但是有一些约定和�
 
 ModSecurity 规则的执行顺序不是由 ID 决定的，而是由规则所在的阶段（phase）和文件加载的顺序决定的。ModSecurity 有五个阶段，分别是请求头（1）、请求体（2）、响应头（3）、响应体（4）和日志（5）。每个阶段内，规则按照文件加载的顺序执行。如果有多个文件包含相同阶段的规则，那么文件名按照字母顺序排序，先加载的文件中的规则先执行。
 
-Read this in [English].(https://github.com/limithit/modsecurity-rule/edit/main/README_en.md)
+Read this in [English](README_en.md).*
