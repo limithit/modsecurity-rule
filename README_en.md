@@ -1,4 +1,4 @@
-
+## Generate some common rules such as preventing burst force cracking of ledger secrets, log4j2 and CVE vulnerabilities in recent years
 ModSecurity is an open source Web Application Firewall (WAF) for detecting and preventing attacks on Web applications. modSecurity can use a set of rules to match and process requests and responses. Each rule has a unique ID that identifies and references the rule1.
 
 There are no strict limits on the range of IDs for ModSecurity rules, but there are some conventions and recommendations. In general, the ID should be a six-digit number from 100000 to 9999992. Different rule sets can use different ID ranges to avoid conflicts. For example, the OWASP ModSecurity Core Rule Set (CRS) uses a range of 900000 to 999999.1 Custom rules can use any unoccupied ID range, but it is recommended to avoid overlap with existing rule sets. One possible approach is to use a range of 100000 to 1999992.
