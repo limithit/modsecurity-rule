@@ -5,6 +5,12 @@ ModSecurity 是一个用于检测和防止 Web 应用程序攻击的开源 Web �
 ModSecurity 规则的 ID 范围没有严格的限制，但是有一些约定和建议。一般来说，ID 应该是一个六位数的数字，从 100000 到 9999992。不同的规则集可以使用不同的 ID 范围来避免冲突。例如，OWASP ModSecurity 核心规则集（CRS）使用 900000 到 999999 的范围1。自定义规则可以使用任何未被占用的 ID 范围，但建议避免与已有的规则集重叠。一种可能的方法是使用 100000 到 199999 的范围2。
 
 ModSecurity 规则的执行顺序不是由 ID 决定的，而是由规则所在的阶段（phase）和文件加载的顺序决定的。ModSecurity 有五个阶段，分别是请求头（1）、请求体（2）、响应头（3）、响应体（4）和日志（5）。每个阶段内，规则按照文件加载的顺序执行。如果有多个文件包含相同阶段的规则，那么文件名按照字母顺序排序，先加载的文件中的规则先执行。
+
+
+Read this in [English](README_en.md).*
+
+###  Test on libmodsecurity.so.3.0.8 & ModSecurity-nginx v1.0.3
+
 ## 部分规则简介
 @pm: `它的含义是“partial match”。它用于匹配变量的值是否包含给定的字符串列表中的任意一个。例如，@pm bot spider crawler表示匹配变量的值是否包含bot、spider或crawler。您可以使用|符号来分隔字符串列表中的元素。您也可以使用文件名作为参数，例如@pmFromFile bad-user-agents.txt，表示匹配变量的值是否包含文件bad-user-agents.txt中列出的任意一个字符串。`
 
@@ -43,6 +49,3 @@ TX:`它的含义是“transaction”。它用于存储和访问规则执行过�
 
 @detectSQLi:`它的含义是“detect SQL injection”。它用于检测变量的值是否包含SQL注入攻击向量。例如，@detectSQLi表示检测变量的值是否包含SQL注入攻击向量。不需要提供任何参数，但是要注意这个操作符可能会产生一些误报或漏报。`
 
-Read this in [English](README_en.md).*
-
-###  Test on libmodsecurity.so.3.0.8 & ModSecurity-nginx v1.0.3
