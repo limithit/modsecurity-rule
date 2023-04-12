@@ -52,3 +52,6 @@ TX:`它的含义是“transaction”。它用于存储和访问规则执行过�
 
 @validateUrlEncoding：`它的含义是“validate URL encoding”。它用于验证变量的值是否符合有效的URL编码格式。例如，@validateUrlEncoding表示验证变量的值是否符合有效的URL编码格式。不需要提供任何参数，但是要注意这个操作符可能会拦截一些合法的请求，例如包含双字节字符的请求。`
 
+setvar `设置变量`
+
+expirevar `变量过期` 
