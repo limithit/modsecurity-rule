@@ -11,6 +11,6 @@ The order in which ModSecurity rules are executed is not determined by the ID, b
 ## Tips
 In ModSecurity rules, the phase parameter is optional. If not specified, the default rule will execute in Phase 2 (request processing phase).
 
-However, when handling `response content`, it is usually necessary to explicitly specify execution in Phase 4 (response processing phase), as this is when the server processes the response body.
+However, when handling `RESPONSE_BODY`, it is usually necessary to explicitly specify execution in Phase 4 (response processing phase), as this is when the server processes the response body.
 
 If your rule does not correctly specify Phase 4, it may not match the keyword in the response content.
