@@ -6,3 +6,11 @@ There are no strict limits on the range of IDs for ModSecurity rules, but there 
 The order in which ModSecurity rules are executed is not determined by the ID, but by the phase (phase) in which the rules are located and the order in which the files are loaded. modSecurity has five phases, request header (1), request body (2), response header (3), response body (4) and log (5). Within each phase, rules are executed in the order in which the files are loaded. If there are multiple files containing rules for the same phase, then the file names are sorted alphabetically and the rules in the file loaded first are executed first.
 
 ###  Test on libmodsecurity.so.3.0.8 & ModSecurity-nginx v1.0.3
+
+
+## Tips
+In ModSecurity rules, the phase parameter is optional. If not specified, the default rule will execute in Phase 2 (request processing phase).
+
+However, when handling response content, it is usually necessary to explicitly specify execution in Phase 4 (response processing phase), as this is when the server processes the response body.
+
+If your rule does not correctly specify Phase 4, it may not match the keyword in the response content.
