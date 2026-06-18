@@ -179,14 +179,17 @@ SecRule REQUEST_URI "@contains /admin" \
 
 ModSecurity 处理请求分为 5 个阶段。如果规则未指定 `phase`，默认在 **Phase 2** 执行。
 
-| 阶段 | 名称 | 说明 |
-| :--- | :--- | :--- |
-| **Phase 1** | 请求头 REQUEST_HEADERS | 处理请求头数据。 |
-| **Phase 2** | 请求体 REQUEST_BODY| 处理请求体数据（**默认阶段**）。 |
-| **Phase 3** | 响应头 RESPONSE_HEADERS| 处理响应头数据。 |
-| **Phase 4** | 响应体 RESPONSE_BODY| 处理响应体数据。**注意：** 检测 `RESPONSE_BODY` 时必须指定此阶段。 |
-| **Phase 5** | 日志 LOGGING| 最后记录日志阶段。 |
+在编写和配置规则时，变量的选用必须与规则的 `phase` 严格匹配。若在错误的阶段调用了未生成的变量（例如在 Phase 1 调用 `RESPONSE_BODY`），规则将失效或产生预期之外的错误。
 
+| Phase ID | 阶段名称 | 推荐处理的变量类型 | 核心场景 |
+| --- | --- | --- | --- |
+| **phase:1** | 请求头 (Request Headers) | `REQUEST_URI`, `REQUEST_HEADERS`, `REMOTE_ADDR` | 阻断恶意扫描、IP 黑名单、恶意客户端（如 sqlmap） |
+| **phase:2** | 请求体 (Request Body) | `ARGS`, `REQUEST_BODY`, `FILES` | 应用层攻击防御（SQLi, XSS, RCE, 恶意文件上传） |
+| **phase:3** | 响应头 (Response Headers) | `RESPONSE_HEADERS`, `RESPONSE_STATUS` | 隐藏敏感敏感中间件信息、重定向拦截 |
+| **phase:4** | 响应体 (Response Body) | `RESPONSE_BODY` | 敏感数据泄露防护（凭据、数据库堆栈、身份证号） |
+| **phase:5** | 日志记录 (Logging) | 所有审计变量、计数器等 | 异步数据统计、持久化集合更新（此阶段不可中断请求） |
+
+---
 > **提示:** 如果规则没有正确指定 `phase:4`，可能无法在响应内容中匹配到关键字。
 
 ---
